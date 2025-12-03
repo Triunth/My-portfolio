@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Julius Cabellon — Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-light:#f8f7f5;
+  --bg-dark:#0b0b0b;
+  --text-light:#1a1a1a;
+  --text-dark:rgba(255,255,255,0.88);
+  --accent-light:#2563eb;
+  --accent-dark:#60a5fa;
+  --panel-light:#f0ede9;
+  --panel-dark:#0f0f0f;
+  --nav-h:72px;
+  --ease:cubic-bezier(.2,.9,.2,1);
+}
+
+html[data-theme="light"]{
+  --bg:var(--bg-light);
+  --text:var(--text-light);
+  --accent:var(--accent-light);
+  --panel:var(--panel-light);
+}
+
+html{
+  --bg:var(--bg-dark);
+  --text:var(--text-dark);
+  --accent:var(--accent-dark);
+  --panel:var(--panel-dark);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;transition:background .32s var(--ease), color .32s var(--ease);position:relative;overflow-x:hidden}
+
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 20% 50%, rgba(96,165,250,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(37,99,235,0.08) 0%, transparent 50%);pointer-events:none;z-index:0}
+html[data-theme="light"] body::before{background:radial-gradient(circle at 20% 50%, rgba(37,99,235,0.06) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(59,130,246,0.04) 0%, transparent 50%)}
+
+.animated-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:hidden}
+
+.blob{position:absolute;border-radius:40% 60% 70% 30% / 40% 50% 60% 50%;filter:blur(40px);opacity:0.15;animation:float 8s ease-in-out infinite}
+html[data-theme="light"] .blob{opacity:0.08}
+
+.blob-1{width:300px;height:300px;background:linear-gradient(135deg,#60a5fa,#3b82f6);top:10%;right:-50px;animation-delay:0s}
+
+.blob-2{width:250px;height:250px;background:linear-gradient(135deg,#3b82f6,#1e40af);bottom:10%;left:-100px;animation-delay:2s}
+
+.blob-3{width:200px;height:200px;background:linear-gradient(135deg,#60a5fa,#0284c7);top:50%;right:10%;animation-delay:4s}
+
+.nav{position:fixed;inset:0 0 auto 0;height:var(--nav-h);display:flex;align-items:center;justify-content:center;z-index:60;background:linear-gradient(180deg,rgba(11,11,11,0.75),transparent);backdrop-filter:blur(8px);transition:background .32s var(--ease)}
+html[data-theme="light"] .nav{background:linear-gradient(180deg,rgba(248,247,245,0.85),transparent)}
+
+.nav-inner{width:100%;max-width:1150px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{color:var(--text);text-decoration:none;font-weight:600;padding:8px;border-radius:6px;transition:color .16s var(--ease), transform .16s var(--ease), background .16s var(--ease)}
+.nav-links a:hover{color:var(--accent);transform:translateY(-2px);background:rgba(37,99,235,0.08)}
+html[data-theme="light"] .nav-links a:hover{background:rgba(37,99,235,0.12)}
+.nav-links a[aria-current="page"]{color:var(--accent);font-weight:700}
+.nav-links a[aria-current="page"]::after{content:"";display:block;height:3px;background:linear-gradient(90deg,var(--accent),#60a5fa);border-radius:3px;margin-top:8px;animation:slideIn .4s var(--ease)}
+
+.theme-toggle{width:44px;height:44px;border-radius:50%;border:2px solid rgba(37,99,235,0.2);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .24s var(--ease);margin-left:auto}
+.theme-toggle:hover{border-color:var(--accent);transform:rotate(20deg)}
+html[data-theme="light"] .theme-toggle{border-color:rgba(37,99,235,0.3)}
+
+.mobile-toggle{display:none;background:none;border:0;color:var(--text);font-size:20px;cursor:pointer;transition:color .16s var(--ease)}
+@media(max-width:880px){
+  .mobile-toggle{display:block}
+  .nav-links{display:none;position:absolute;left:0;right:0;top:var(--nav-h);background:var(--panel);flex-direction:column;padding:12px;gap:8px;backdrop-filter:blur(10px)}
+}
+
+.hero{min-height:66vh;padding:calc(var(--nav-h) + 28px) 6% 44px 6%;display:flex;align-items:center;gap:28px;position:relative;overflow:hidden;transition:background .32s var(--ease);z-index:1}
+
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 0%, rgba(37,99,235,0.02) 50%, transparent 100%);pointer-events:none;animation:shimmer 6s ease-in-out infinite}
+
+.left{max-width:780px;display:flex;flex-direction:column;gap:10px;position:relative;z-index:2}
+.kicker{font-weight:700;color:rgba(37,99,235,0.8);letter-spacing:2px;font-size:.95rem;opacity:0;transform:translateY(10px);animation:fadeInUp .54s var(--ease) .12s both}
+html[data-theme="light"] .kicker{color:rgba(37,99,235,0.9)}
+
+.title{font-weight:800;line-height:0.92;letter-spacing:1.4px;font-size:64px;margin:0;background:linear-gradient(135deg,var(--accent),#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;transform:translateY(18px);animation:fadeInUp .6s var(--ease) .24s both}
+html[data-theme="light"] .title{background:linear-gradient(135deg,#2563eb,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.title-sub{font-weight:600;color:var(--text);font-size:16px;margin-top:6px;opacity:0;transform:translateY(12px);animation:fadeInUp .54s var(--ease) .36s both}
+
+.profile{width:104px;height:104px;border-radius:999px;border:3px solid var(--accent);background:linear-gradient(135deg,rgba(96,165,250,0.15),rgba(37,99,235,0.1));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:26px;box-shadow:0 12px 30px rgba(37,99,235,0.15);animation:float .6s ease-in-out infinite;animation-delay:.2s}
+html[data-theme="light"] .profile{border-color:var(--accent-light);background:linear-gradient(135deg,rgba(37,99,235,0.12),rgba(59,130,246,0.08));box-shadow:0 12px 30px rgba(37,99,235,0.1)}
+
+.decor-right{position:absolute;right:28px;top:72px;width:76px;height:200px;border-radius:40px;background:linear-gradient(180deg,rgba(96,165,250,0.3),rgba(37,99,235,0.15));filter:drop-shadow(0 10px 28px rgba(37,99,235,0.2));opacity:.98;animation:float 8s ease-in-out infinite;z-index:0}
+html[data-theme="light"] .decor-right{background:linear-gradient(180deg,rgba(37,99,235,0.25),rgba(59,130,246,0.12));filter:drop-shadow(0 10px 28px rgba(37,99,235,0.15))}
+
+.hero-divider{height:100px;background:linear-gradient(180deg,rgba(37,99,235,0.08),rgba(96,165,250,0.04));display:flex;align-items:center;padding-left:6%;margin-top:14px;border-top:1px solid rgba(37,99,235,0.1);border-bottom:1px solid rgba(37,99,235,0.1);transition:background .32s var(--ease);position:relative;z-index:1;animation:slideInUp .8s var(--ease) .6s both}
+html[data-theme="light"] .hero-divider{background:linear-gradient(180deg,rgba(37,99,235,0.06),rgba(59,130,246,0.02))}
+
+.hero-name{font-size:30px;font-weight:700;color:var(--accent);opacity:0;transform:translateY(18px);animation:fadeInUp .54s var(--ease) .6s both}
+
+.bg-illustration{position:absolute;left:4%;bottom:-6%;width:480px;height:480px;opacity:.04;background-repeat:no-repeat;background-size:contain;z-index:0}
+html[data-theme="light"] .bg-illustration{opacity:.05}
+
+.reveal{will-change:transform,opacity}
+.reveal.in{opacity:1;transform:none}
+
+@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes slideIn{from{width:0;opacity:0}to{width:32px;opacity:1}}
+@keyframes slideInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+footer{padding:40px 8%;text-align:center;color:var(--text);padding-bottom:56px;transition:color .32s var(--ease);position:relative;z-index:1}
+
+@media(max-width:980px){
+  .hero{padding:calc(var(--nav-h) + 20px) 5% 36px 5%;flex-direction:column;align-items:flex-start}
+  .title{font-size:48px}
+  .profile{width:88px;height:88px;font-size:20px}
+  .decor-right{display:none}
+  .blob{opacity:0.08}
+}
+@media(max-width:520px){
+  .title{font-size:32px}
+  .blob-1,.blob-2,.blob-3{opacity:0.05}
+}
+@media(prefers-reduced-motion:reduce){.decor-right,*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="animated-bg">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<nav class="nav" role="navigation" aria-label="Main">
+  <div class="nav-inner">
+    <div class="nav-links" id="navLinks">
+      <a href="home.html" aria-current="page">Home</a>
+      <a href="second.html">About</a>
+      <a href="project.html">Project</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+    <button class="mobile-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰</button>
+  </div>
+</nav>
+
+<header class="hero" role="banner">
+  <div class="left">
+    <div class="kicker reveal">Junior</div>
+    <h1 class="title reveal">WEB DEVELOPER</h1>
+    <div class="title-sub reveal">Building responsive, accessible front‑end experiences</div>
+  </div>
+  <div class="bg-illustration" aria-hidden="true" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 800 800&quot;><g fill=&quot;none&quot; stroke=&quot;%233b82f6&quot; stroke-width=&quot;6&quot; opacity=&quot;0.06&quot;><path d=&quot;M80 600 C220 420 480 420 700 600&quot;/></g></svg>')"></div>
+  <div class="decor-right" aria-hidden="true"></div>
+</header>
+
+<div class="hero-divider" role="presentation">
+  <div class="hero-name reveal">Julius Cabellon</div>
+</div>
+
+<footer>
+  <p>© 2025 Julius Cabellon. All rights reserved.</p>
+</footer>
+
+<script>
+const themeToggle = document.getElementById('themeToggle');
+const htmlEl = document.documentElement;
+const savedTheme = localStorage.getItem('theme') || 'dark';
+htmlEl.setAttribute('data-theme', savedTheme);
+themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', ()=>{
+  const current = htmlEl.getAttribute('data-theme');
+  const newTheme = current === 'dark' ? 'light' : 'dark';
+  htmlEl.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+});
+
+const menu = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+menu?.addEventListener('click', ()=>{
+  const open = menu.getAttribute('aria-expanded') === 'true';
+  menu.setAttribute('aria-expanded', String(!open));
+  navLinks.style.display = open ? 'none' : 'flex';
+});
+
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.14});
+document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+window.addEventListener('resize', ()=>{ if(window.innerWidth > 880) navLinks.style.display = 'flex'; });
+</script>
+</body>
+</html>

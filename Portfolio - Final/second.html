@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Julius Cabellon — About</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ADDITIONAL CSS FOR ABOUT PAGE ONLY */
+.page-title {
+  text-align: center;
+  margin-top: 120px;
+  margin-bottom: 60px;
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--accent);
+  animation: fadeInDown 0.6s var(--ease);
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.content {
+  max-width: 1150px;
+  margin: 60px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: start;
+  position: relative;
+  z-index: 2;
+}
+
+.about-section {
+  background: transparent;
+  border-radius: 12px;
+  padding: 40px;
+  color: var(--text);
+  animation: fadeInUp 0.54s var(--ease) 0.24s forwards;
+  opacity: 0;
+  text-align: center;
+  position: relative;
+}
+
+.about-section::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.08), rgba(37, 99, 235, 0.04));
+  border-radius: 12px;
+  z-index: -1;
+  opacity: 0;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.about-section:hover::before {
+  opacity: 1;
+}
+
+.about-desc {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 32px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.expand-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--accent), #60a5fa);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.24s var(--ease);
+  margin-top: 12px;
+  animation: fadeInUp 0.6s var(--ease) 0.3s forwards;
+  opacity: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.expand-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: translateX(-100%);
+  animation: shine 2s ease-in-out infinite;
+}
+
+.expand-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.3);
+}
+
+.expand-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s var(--ease);
+}
+
+.expand-btn.open svg {
+  transform: rotate(180deg);
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+  transition: all 0.4s var(--ease);
+}
+
+.stats-container.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.stat-box {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(37, 99, 235, 0.05));
+  border: 2px solid rgba(37, 99, 235, 0.2);
+  border-radius: 12px;
+  padding: 28px;
+  text-align: center;
+  transition: all 0.2s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-box::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.2), transparent);
+  border-radius: 50%;
+  animation: orb 6s ease-in-out infinite;
+}
+
+.stat-box:nth-child(2)::before {
+  animation-delay: -3s;
+}
+
+.stat-box:hover {
+  border-color: rgba(37, 99, 235, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.15);
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  opacity: 0.7;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+}
+
+.personal-details {
+  background: transparent;
+  border-radius: 12px;
+  padding: 40px;
+  color: var(--text);
+  animation: fadeInUp 0.54s var(--ease) 0.48s forwards;
+  opacity: 0;
+  margin-top: 40px;
+  position: relative;
+}
+
+.personal-details h3 {
+  color: var(--accent);
+  margin-top: 0;
+  font-size: 24px;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.detail-card {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.08), rgba(37, 99, 235, 0.04));
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: left;
+  transition: all 0.2s var(--ease);
+}
+
+.detail-card:hover {
+  border-color: rgba(37, 99, 235, 0.4);
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.12), rgba(37, 99, 235, 0.06));
+}
+
+.detail-card strong {
+  color: var(--accent);
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-card span {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.skills-section {
+  background: transparent;
+  border-radius: 12px;
+  padding: 40px;
+  color: var(--text);
+  animation: fadeInUp 0.54s var(--ease) 0.36s forwards;
+  opacity: 0;
+  margin-top: 40px;
+  position: relative;
+}
+
+.skills-section h3 {
+  color: var(--accent);
+  margin-top: 0;
+  font-size: 24px;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.skills-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.skill-item {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.08), rgba(37, 99, 235, 0.04));
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  font-weight: 600;
+  transition: all 0.2s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.skill-item:hover::after {
+  left: 100%;
+}
+
+.skill-item:hover {
+  border-color: rgba(37, 99, 235, 0.4);
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.12), rgba(37, 99, 235, 0.06));
+}
+
+.hobbies-section {
+  background: transparent;
+  border-radius: 12px;
+  padding: 40px;
+  color: var(--text);
+  animation: fadeInUp 0.54s var(--ease) 0.6s forwards;
+  opacity: 0;
+  margin-top: 40px;
+  position: relative;
+}
+
+.hobbies-section h3 {
+  color: var(--accent);
+  margin-top: 0;
+  font-size: 24px;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.hobbies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hobby-card {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.08), rgba(37, 99, 235, 0.04));
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.2s var(--ease);
+}
+
+.hobby-card:hover {
+  border-color: rgba(37, 99, 235, 0.4);
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.12), rgba(37, 99, 235, 0.06));
+}
+
+.hobby-card .hobby-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.hobby-card h4 {
+  color: var(--accent);
+  margin: 0 0 8px 0;
+  font-size: 16px;
+}
+
+.hobby-card p {
+  margin: 0;
+  color: var(--text);
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes shimmer {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes orb {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(40px, 40px); }
+  100% { transform: translate(0, 0); }
+}
+
+@media (max-width: 980px) {
+  .stats-container { grid-template-columns: 1fr; }
+  .about-section, .personal-details, .skills-section, .hobbies-section { padding: 28px; }
+  .details-grid, .hobbies-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 520px) {
+  .page-title { font-size: 36px; }
+  .about-section, .personal-details, .skills-section, .hobbies-section { padding: 20px; }
+  .about-desc { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<!-- Animated Background -->
+<div class="animated-bg">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="second.html" aria-current="page">About</a>
+      <a href="project.html">Project</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+  </div>
+</nav>
+
+<!-- Page Content -->
+<h1 class="page-title">About Me</h1>
+
+<main class="content">
+  <!-- Biography Section -->
+  <section class="about-section">
+    <p class="about-desc">
+      Hi! I'm Julius Ceasar A. Cabellon, a first-year BSIT student at Cebu Technological University. I'm passionate about programming and web development, with expertise in Java, Python, and C. I love building intuitive user interfaces and creating efficient, clean code.
+    </p>
+
+    <button class="expand-btn" id="expandBtn" aria-expanded="false">
+      See My Experience
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:18px;height:18px">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </button>
+
+    <div class="stats-container" id="statsContainer">
+      <div class="stat-box">
+        <div class="stat-number">2+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">3+</div>
+        <div class="stat-label">Completed Projects</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personal Details -->
+  <section class="personal-details">
+    <h3>Personal Details</h3>
+    <div class="details-grid">
+      <div class="detail-card">
+        <strong>Name:</strong>
+        <span>Julius Ceasar A. Cabellon</span>
+      </div>
+      <div class="detail-card">
+        <strong>Age:</strong>
+        <span>19</span>
+      </div>
+      <div class="detail-card">
+        <strong>Hometown:</strong>
+        <span>Cebu, Philippines</span>
+      </div>
+      <div class="detail-card">
+        <strong>School:</strong>
+        <span>Cebu Technological University</span>
+      </div>
+      <div class="detail-card">
+        <strong>Course:</strong>
+        <span>BS Information Technology</span>
+      </div>
+      <div class="detail-card">
+        <strong>Year Level:</strong>
+        <span>2st Year</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="skills-section">
+    <h3>Skills & Technologies</h3>
+    <div class="skills-list">
+      <div class="skill-item">✓ Java</div>
+      <div class="skill-item">✓ Python</div>
+      <div class="skill-item">✓ C Programming</div>
+      <div class="skill-item">✓ HTML & CSS</div>
+      <div class="skill-item">✓ JavaScript</div>
+      <div class="skill-item">✓ Responsive Design</div>
+      <div class="skill-item">✓ UI/UX Principles</div>
+      <div class="skill-item">✓ Version Control (Git)</div>
+    </div>
+  </section>
+
+  <!-- Hobbies Section -->
+  <section class="hobbies-section">
+    <h3>Hobbies & Interests</h3>
+    <div class="hobbies-grid">
+      <div class="hobby-card">
+        <span class="hobby-icon">💻</span>
+        <h4>Coding Projects</h4>
+        <p>Building console apps and websites</p>
+      </div>
+      <div class="hobby-card">
+        <span class="hobby-icon">🎮</span>
+        <h4>Gaming</h4>
+        <p>Strategy and puzzle games</p>
+      </div>
+      <div class="hobby-card">
+        <span class="hobby-icon">📚</span>
+        <h4>Learning Tech</h4>
+        <p>Exploring new programming concepts</p>
+      </div>
+      <div class="hobby-card">
+        <span class="hobby-icon">🎵</span>
+        <h4>Music</h4>
+        <p>Listening while coding</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Julius Cabellon. All rights reserved.</p>
+</footer>
+
+<script>
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const htmlEl = document.documentElement;
+const savedTheme = localStorage.getItem('theme') || 'dark';
+htmlEl.setAttribute('data-theme', savedTheme);
+themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+  const current = htmlEl.getAttribute('data-theme');
+  const newTheme = current === 'dark' ? 'light' : 'dark';
+  htmlEl.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+});
+
+// Expand Button
+const expandBtn = document.getElementById('expandBtn');
+const statsContainer = document.getElementById('statsContainer');
+
+if (expandBtn && statsContainer) {
+  expandBtn.addEventListener('click', () => {
+    const isOpen = expandBtn.getAttribute('aria-expanded') === 'true';
+    expandBtn.setAttribute('aria-expanded', String(!isOpen));
+    statsContainer.classList.toggle('show');
+    expandBtn.classList.toggle('open');
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Julius Cabellon — Projects</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* YOUR EXACT PROJECT PAGE CSS - NO CHANGES */
+:root{
+  --bg-light:#f8f7f5;
+  --bg-dark:#0b0b0b;
+  --text-light:#1a1a1a;
+  --text-dark:rgba(255,255,255,0.88);
+  --accent-light:#2563eb;
+  --accent-dark:#60a5fa;
+  --panel-light:#f0ede9;
+  --panel-dark:#0f0f0f;
+  --nav-h:72px;
+  --ease:cubic-bezier(.2,.9,.2,1);
+}
+
+html[data-theme="light"]{
+  --bg:var(--bg-light);
+  --text:var(--text-light);
+  --accent:var(--accent-light);
+  --panel:var(--panel-light);
+}
+
+html{
+  --bg:var(--bg-dark);
+  --text:var(--text-dark);
+  --accent:var(--accent-dark);
+  --panel:var(--panel-dark);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Arial;-webkit-font-smoothing:antialiased;transition:background .32s var(--ease), color .32s var(--ease);position:relative;overflow-x:hidden}
+
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 20% 50%, rgba(96,165,250,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(37,99,235,0.08) 0%, transparent 50%);pointer-events:none;z-index:0}
+html[data-theme="light"] body::before{background:radial-gradient(circle at 20% 50%, rgba(37,99,235,0.06) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(59,130,246,0.04) 0%, transparent 50%)}
+
+.animated-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:hidden}
+
+.blob{position:absolute;border-radius:40% 60% 70% 30% / 40% 50% 60% 50%;filter:blur(40px);opacity:0.15;animation:float 8s ease-in-out infinite}
+html[data-theme="light"] .blob{opacity:0.08}
+
+.blob-1{width:300px;height:300px;background:linear-gradient(135deg,#60a5fa,#3b82f6);top:10%;right:-50px;animation-delay:0s}
+.blob-2{width:250px;height:250px;background:linear-gradient(135deg,#3b82f6,#1e40af);bottom:10%;left:-100px;animation-delay:2s}
+.blob-3{width:200px;height:200px;background:linear-gradient(135deg,#60a5fa,#0284c7);top:50%;right:10%;animation-delay:4s}
+
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);display:flex;align-items:center;justify-content:center;z-index:50;background:linear-gradient(180deg,rgba(11,11,11,0.75),transparent);backdrop-filter:blur(8px);border-bottom:1px solid rgba(37,99,235,0.1)}
+html[data-theme="light"] nav{background:linear-gradient(180deg,rgba(248,247,245,0.85),transparent)}
+
+.nav-inner{max-width:1150px;width:100%;padding:0 20px;display:flex;gap:28px;align-items:center;justify-content:space-between}
+
+.nav-links{display:flex;gap:24px;align-items:center;flex:1}
+
+.nav-inner a{color:var(--text);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:6px;transition:all .16s var(--ease)}
+.nav-inner a:hover{color:var(--accent);transform:translateY(-2px);background:rgba(37,99,235,0.08)}
+html[data-theme="light"] .nav-inner a:hover{background:rgba(37,99,235,0.12)}
+.nav-inner a[aria-current="page"]{color:var(--accent);font-weight:700}
+.nav-inner a[aria-current="page"]::after{content:"";display:block;height:3px;background:var(--accent);border-radius:3px;margin-top:6px}
+
+.theme-toggle{width:44px;height:44px;border-radius:50%;border:2px solid rgba(37,99,235,0.2);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .24s var(--ease);margin-left:auto}
+.theme-toggle:hover{border-color:var(--accent);transform:rotate(20deg)}
+html[data-theme="light"] .theme-toggle{border-color:rgba(37,99,235,0.3)}
+
+.page-title{text-align:center;margin-top:120px;margin-bottom:60px;font-size:48px;font-weight:800;letter-spacing:2px;color:var(--accent);animation:fadeInDown .6s var(--ease) forwards}
+
+main{max-width:1200px;margin:0 auto;padding:20px;position:relative;z-index:1}
+
+.projects-intro{text-align:center;font-size:18px;line-height:1.8;color:rgba(255,255,255,0.8);margin-bottom:60px;animation:fadeInUp .6s var(--ease) .2s forwards}
+html[data-theme="light"] .projects-intro{color:rgba(26,26,26,0.8)}
+
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:80px}
+
+.project-card{background:linear-gradient(135deg,rgba(96,165,250,0.08),rgba(37,99,235,0.04));border:2px solid rgba(37,99,235,0.2);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .3s var(--ease);animation:fadeInUp .6s var(--ease) forwards}
+
+.project-card:nth-child(1){animation-delay:.3s}
+.project-card:nth-child(2){animation-delay:.4s}
+.project-card:nth-child(3){animation-delay:.5s}
+
+.project-card:hover{border-color:var(--accent);transform:translateY(-8px);box-shadow:0 16px 40px rgba(37,99,235,0.25)}
+
+.project-thumb{width:100%;height:200px;background:linear-gradient(135deg,rgba(96,165,250,0.15),rgba(37,99,235,0.08));display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:48px;font-weight:800;overflow:hidden;position:relative}
+
+.project-thumb::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);animation:shimmer 2s infinite}
+
+.project-info{padding:24px;display:flex;flex-direction:column;gap:12px}
+
+.project-name{font-size:20px;font-weight:800;color:var(--accent);margin:0}
+
+.project-desc{font-size:14px;line-height:1.6;color:rgba(255,255,255,0.7);margin:0}
+html[data-theme="light"] .project-desc{color:rgba(26,26,26,0.7)}
+
+.project-tech{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+
+.tech-tag{background:rgba(37,99,235,0.15);color:var(--accent);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;transition:all .2s var(--ease)}
+.tech-tag:hover{background:rgba(37,99,235,0.25);transform:scale(1.05)}
+
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);z-index:100;align-items:center;justify-content:center;animation:fadeIn .3s var(--ease)}
+
+.modal.show{display:flex}
+
+.modal-content{background:var(--panel);border-radius:16px;max-width:700px;width:90%;max-height:90vh;overflow-y:auto;padding:40px;position:relative;animation:slideUp .4s var(--ease);border:2px solid rgba(37,99,235,0.2)}
+
+.modal-close{position:absolute;top:20px;right:20px;background:rgba(37,99,235,0.2);border:none;color:var(--text);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;transition:all .2s var(--ease)}
+.modal-close:hover{background:rgba(37,99,235,0.4);transform:rotate(90deg)}
+
+.modal-image{width:100%;height:300px;background:linear-gradient(135deg,rgba(96,165,250,0.15),rgba(37,99,235,0.08));border-radius:12px;margin-bottom:28px;display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:800;overflow:hidden}
+
+.modal-image img{width:100%;height:100%;object-fit:cover}
+
+.modal-title{font-size:32px;font-weight:800;color:var(--accent);margin:0 0 16px;letter-spacing:1px}
+
+.modal-description{font-size:16px;line-height:1.8;color:rgba(255,255,255,0.8);margin-bottom:28px}
+html[data-theme="light"] .modal-description{color:rgba(26,26,26,0.8)}
+
+.modal-details{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+
+.detail-item h4{font-size:14px;font-weight:700;color:var(--accent);margin:0 0 8px;letter-spacing:0.5px;text-transform:uppercase}
+
+.detail-item p{margin:0;color:rgba(255,255,255,0.7);font-size:15px}
+html[data-theme="light"] .detail-item p{color:rgba(26,26,26,0.7)}
+
+.modal-tech{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+
+.tech-badge{background:linear-gradient(135deg,rgba(96,165,250,0.15),rgba(37,99,235,0.08));border:1px solid rgba(37,99,235,0.3);color:var(--accent);padding:8px 16px;border-radius:24px;font-size:13px;font-weight:600;transition:all .2s var(--ease)}
+.tech-badge:hover{border-color:var(--accent);transform:translateY(-2px)}
+
+.modal-links{display:flex;gap:16px;margin-top:28px;padding-top:28px;border-top:2px solid rgba(37,99,235,0.15)}
+
+.btn-link{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent),#60a5fa);color:white;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:700;font-size:15px;transition:all .2s var(--ease);border:none;cursor:pointer}
+.btn-link:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(37,99,235,0.3)}
+
+.modal-transcript {
+  display: none;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Segoe UI Mono", monospace;
+  white-space: pre-wrap;
+  max-height: 320px;
+  overflow: auto;
+  margin-top: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+html[data-theme="light"] .modal-transcript {
+  background: rgba(250,250,250,0.95);
+  color: #0b1220;
+  border: 1px solid rgba(37,99,235,0.08);
+}
+
+.modal-toggle {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: inherit;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight:700;
+}
+.modal-toggle:hover{opacity:.95;transform:translateY(-2px)}
+
+@keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+</style>
+</head>
+<body>
+<div class="animated-bg">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="second.html">About</a>
+      <a href="project.html" aria-current="page">Project</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
+  </div>
+</nav>
+
+<main>
+  <h1 class="page-title">My Projects</h1>
+
+  <p class="projects-intro">
+    Here are some of the projects I've completed. Click on any project to see more details, technologies used, and links.
+  </p>
+
+  <div class="projects-grid">
+    <div class="project-card" data-project="1">
+      <div class="project-thumb">🎨</div>
+      <div class="project-info">
+        <h3 class="project-name">Portfolio Website</h3>
+        <p class="project-desc">A modern, responsive portfolio built with HTML, CSS & JavaScript</p>
+        <div class="project-tech">
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-project="2">
+      <div class="project-thumb">💻</div>
+      <div class="project-info">
+        <h3 class="project-name">Todo List</h3>
+        <p class="project-desc">A full-stack task management application with Java backend</p>
+        <div class="project-tech">
+          <span class="tech-tag">Java</span>
+          <span class="tech-tag">UI Design</span>
+          <span class="tech-tag">Database</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-project="3">
+      <div class="project-thumb">🏠</div>
+      <div class="project-info">
+        <h3 class="project-name">Rentify - Landlord</h3>
+        <p class="project-desc">Apartment/Room Rental Management System for landlords</p>
+        <div class="project-tech">
+          <span class="tech-tag">HTML/CSS</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Web App</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- MODAL -->
+<div class="modal" id="projectModal">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+    <div class="modal-image" id="modalImage">🎨</div>
+    <h2 class="modal-title" id="modalTitle">Project Title</h2>
+    <p class="modal-description" id="modalDescription">Project description goes here...</p>
+
+    <div class="modal-details">
+      <div class="detail-item"><h4>Status</h4><p id="modalStatus">Completed</p></div>
+      <div class="detail-item"><h4>Completed</h4><p id="modalDate">2025</p></div>
+    </div>
+
+    <div>
+      <h4 style="color:var(--accent);margin:0 0 12px;font-size:14px;letter-spacing:0.5px;text-transform:uppercase">Technologies Used</h4>
+      <div class="modal-tech" id="modalTech"></div>
+    </div>
+
+    <!-- BUTTONS: View Live, View Code, View Transcript -->
+    <div class="modal-links" id="modalActions">
+      <a href="#" class="btn-link" id="modalLiveBtn" target="_blank" rel="noopener">View Live →</a>
+      <a href="#" class="btn-link" id="modalCodeBtn" target="_blank" rel="noopener">View Code →</a>
+      <button type="button" class="modal-toggle" id="toggleTranscript" aria-expanded="false">View Transcript</button>
+    </div>
+
+    <!-- Transcript Preview Area -->
+    <pre class="modal-transcript" id="modalTranscript" aria-hidden="true"></pre>
+  </div>
+</div>
+
+<script>
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const htmlEl = document.documentElement;
+const savedTheme = localStorage.getItem('theme') || 'dark';
+htmlEl.setAttribute('data-theme', savedTheme);
+themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+  const current = htmlEl.getAttribute('data-theme');
+  const newTheme = current === 'dark' ? 'light' : 'dark';
+  htmlEl.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+});
+
+// Project Data
+const projectsData = {
+  1: {
+    title: 'Portfolio Website',
+    icon: '🎨',
+    description: 'A modern and responsive personal portfolio website showcasing my skills and projects. Built with clean HTML, CSS, and vanilla JavaScript with smooth animations and dark/light mode support.',
+    status: 'Completed',
+    date: 'December 2025',
+    technologies: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Dark Mode'],
+    liveUrl: '#',
+    codeUrl: '#',
+    transcript: `=== PORTFOLIO WEBSITE ===
+
+This is my personal portfolio website that you're currently viewing! It showcases my skills, projects, and contact information.
+
+FEATURES:
+- Dark/Light theme toggle
+- Animated background with floating blobs
+- Responsive design for all devices
+- Interactive project modals
+- Smooth animations and transitions
+- Contact form with validation
+
+TECHNOLOGIES:
+- HTML5 for semantic structure
+- CSS3 with CSS Variables for theming
+- Vanilla JavaScript for interactivity
+- Google Fonts (Inter)
+- No frameworks or libraries
+
+This portfolio demonstrates my ability to create modern, user-friendly web interfaces with clean code and attention to detail.`
+  },
+  2: {
+    title: 'To Do List (C - 1st Year Project)',
+    icon: '💻',
+    description: 'Console-based Task Manager written in C. Features registration/login, admin login, year/semester/subject choices, task categories, priorities, deadlines, notifications, and basic file persistence. Built as a 1st-year school project.',
+    status: 'Completed',
+    date: 'May 2024',
+    technologies: ['C (console)', 'File I/O', 'Structs & Arrays', 'CLI UX'],
+    liveUrl: '#',
+    codeUrl: '#',
+    transcript: `-- MENU --
+1. Register
+2. Login
+3. Admin Login
+4. Exit
+Enter your choice: 1
+Enter username: 1
+Enter password: 1
+Registration successful!
+
+-- MENU --
+1. Register
+2. Login
+3. Admin Login
+4. Exit
+Enter your choice: 2
+Enter username: 1
+Enter password: 1
+Login successful! Welcome, 1.
+
+--- Task Notifications ---
+No tasks due soon.
+
+-- MENU --
+Choose Year Level
+1.) 1st Year
+2.) 2nd Year
+
+-- MENU --
+Choose Semester
+1.) 1st Semester
+2.) 2nd Semester
+
+--- Task Management Menu ---
+1. Add New Task
+2. View Task List
+3. Edit/Delete Tasks
+4. Pet Companion
+5. Log Out
+Enter your choice:
+
+Choose Task Name:
+1. Assignments
+2. Projects
+3. Quizzes and Exams
+4. Group Activities/Projects
+5. Reports and Presentations
+6. Participation in Extracurricular Act.
+7. Practical or Hands-on
+8. Research Work
+9. Community Involvement
+10. Journals
+11. Others
+Enter your choice: 1
+
+(When user chooses 1st Year, 1st Semester) Choose Subject (1st Semester):
+1. Programming
+2. Introduction to Computing
+3. Multimedia
+4. History
+5. The Entrepreneurial Mind
+6. Physical Education 1
+7. Mathematics
+8. National Service Training Program 1
+9. Others
+
+(When user chooses 1st Year, 2nd Semester) Choose Subject (2nd Semester):
+1. Computer Programming 2
+2. Purposive Communication
+3. Science, Technology, & Society
+4. Understanding the Self
+5. Gender and Society with Peace Studies
+6. Discreet Mathematics
+7. Digital Logic Design
+8. Physical Education 2
+9. National Service Training Program 2
+10. Others
+
+(When user chooses 2nd Year, 1st Semester) Choose Subject:
+1. Ethics
+2. Environmental Society
+3. Life and Works of Rizal
+4. Quantitative Method (Modeling & Simulation)
+5. Data Structure and Algorithm
+6. Object-Oriented Programming
+7. Web Systems & Technologies
+8. Physical Education 3
+9. Others
+
+(2nd Year, 2nd Semester) Choose Subject:
+1. The Contemporary World
+2. Integrative Programming & Technologies 1
+3. Networking 1
+4. Information Management
+5. Platform Technologies
+6. ASP .NET
+7. Physical Education 4
+8. Others
+
+Enter your choice: 3
+Task title or Description: Research
+Priority (1-5, with 5 being the highest): 5
+Enter deadline (MM-DD-YYYY): 01-10-2025
+01-09-2025 10:47:47`,
+    screenshots: [
+      '1styr-proj-(1).jpg',
+      '1styr-proj-(2).jpg',
+      '1styr-proj-(3).jpg',
+      '1styr-proj-(4).jpg',
+      '1styr-proj-(5).jpg'
+    ]
+  },
+  3: {
+    title: 'Rentify - Landlord Management System',
+    icon: '🏠',
+    description: 'A web-based Apartment/Room Rental Management System designed specifically for landlords. Helps manage tenants, track payments, monitor rent due dates, and handle maintenance requests efficiently. Focuses on the landlord side with a clean, user-friendly interface.',
+    status: 'Completed',
+    date: 'November 2025',
+    technologies: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'UI/UX', 'Web Application'],
+    liveUrl: 'https://rentify-landlord.netlify.app/login.html',
+    codeUrl: 'https://github.com/franzenbeltran/Rentify-Landlord',
+    transcript: `=== RENTIFY - LANDLORD MANAGEMENT SYSTEM ===
+
+PROJECT OVERVIEW:
+A web-based tool for managing tenants, payments, and property maintenance.
+
+PROJECT LINKS:
+1. Live Demo (Netlify): https://rentify-landlord.netlify.app/login.html
+2. Source Code: https://github.com/franzenbeltran/Rentify-Landlord
+
+WHAT CAN IT DO? (Landlord Side Only):
+
+TENANT MANAGEMENT:
+- Add, edit, and remove tenants
+- View complete tenant list with room/house assignments
+- Store tenant documents and information
+
+PAYMENT MANAGEMENT:
+- Set and monitor rent due dates
+- Track payments (paid, unpaid, late status)
+- Send rent reminders automatically
+- Track monthly and yearly income
+
+PROPERTY MANAGEMENT:
+- Manage maintenance requests from tenants
+- Track repair status and completion
+- Organize multiple properties in one dashboard
+
+WHY THIS PROJECT IS GOOD:
+
+* PRACTICAL APPLICATION:
+  - Directly useful for anyone planning to be a landlord or property manager
+  - Helps organize tenants, payments, and schedules efficiently
+  - Reduces manual work and avoids forgotten payments or due dates
+
+* TECHNICAL DEMONSTRATION:
+  - Shows skills in database design concepts
+  - Demonstrates financial tracking and reporting features
+  - Features user-friendly interfaces and responsive design
+  - Can be expanded into a full property management system
+
+PROJECT GOAL:
+The goal is to create a simple and practical platform that organizes all tasks related to rental management—tenant records, rent schedules, payments, and maintenance requests in one place.
+
+OVERALL PURPOSE:
+This system makes rental management more efficient and organized. It solves common issues like:
+- Missed payments and late fees
+- Messy tenant information storage
+- Delayed maintenance requests
+- Lack of financial tracking
+
+TECHNICAL IMPLEMENTATION:
+- Frontend: HTML5, CSS3, JavaScript
+- Responsive design for mobile and desktop
+- User authentication system
+- Data persistence using local storage
+- Clean, intuitive dashboard interface
+
+FUTURE ENHANCEMENTS:
+- Database integration (MySQL/MongoDB)
+- Email/SMS notification system
+- Online payment integration
+- Mobile app version
+- Advanced reporting and analytics
+
+This project demonstrates my ability to create practical, user-focused web applications that solve real-world problems.`
+  }
+};
+
+// Modal Functions
+function openModal(projectId) {
+  const project = projectsData[projectId];
+  if (!project) return;
+
+  document.getElementById('modalImage').textContent = project.icon || '📦';
+  document.getElementById('modalTitle').textContent = project.title || 'Project';
+  document.getElementById('modalDescription').textContent = project.description || '';
+  document.getElementById('modalStatus').textContent = project.status || '';
+  document.getElementById('modalDate').textContent = project.date || '';
+  
+  // Set technologies
+  const modalTech = document.getElementById('modalTech');
+  if (modalTech) {
+    modalTech.innerHTML = '';
+    project.technologies.forEach(tech => {
+      const badge = document.createElement('span');
+      badge.className = 'tech-badge';
+      badge.textContent = tech;
+      modalTech.appendChild(badge);
+    });
+  }
+
+  // Set links
+  const liveBtn = document.getElementById('modalLiveBtn');
+  const codeBtn = document.getElementById('modalCodeBtn');
+  
+  if (liveBtn) liveBtn.href = project.liveUrl || '#';
+  
+  if (codeBtn) {
+    // For Rentify project, use GitHub repository link (no alert)
+    if (projectId === '3') {
+      codeBtn.href = project.codeUrl;
+      codeBtn.onclick = null; // Remove the alert
+    } else {
+      // For other projects, keep the "deleted code" alert
+      codeBtn.href = '#';
+      codeBtn.onclick = (e) => {
+        e.preventDefault();
+        alert('Sorry, I can\'t provide the code because I deleted it :(');
+      };
+    }
+  }
+
+  // Handle transcript
+  const transcriptEl = document.getElementById('modalTranscript');
+  const toggleTranscriptBtn = document.getElementById('toggleTranscript');
+  
+  if (project.transcript && transcriptEl && toggleTranscriptBtn) {
+    transcriptEl.textContent = project.transcript;
+    transcriptEl.style.display = 'none';
+    toggleTranscriptBtn.style.display = 'inline-block';
+    toggleTranscriptBtn.setAttribute('aria-expanded', 'false');
+  } else {
+    toggleTranscriptBtn.style.display = 'none';
+  }
+
+  document.getElementById('projectModal').classList.add('show');
+}
+
+function closeModal() {
+  const modal = document.getElementById('projectModal');
+  if (modal) modal.classList.remove('show');
+}
+
+// Initialize project cards when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // Add click events to project cards
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', function() {
+      const projectId = this.getAttribute('data-project');
+      openModal(projectId);
+    });
+  });
+
+  // Add event to transcript toggle button
+  const toggleTranscriptBtn = document.getElementById('toggleTranscript');
+  if (toggleTranscriptBtn) {
+    toggleTranscriptBtn.addEventListener('click', function() {
+      const transcriptEl = document.getElementById('modalTranscript');
+      if (transcriptEl) {
+        const shown = transcriptEl.style.display === 'block';
+        transcriptEl.style.display = shown ? 'none' : 'block';
+        this.setAttribute('aria-expanded', String(!shown));
+        if (!shown) transcriptEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  }
+
+  // Close modal when clicking outside
+  const projectModal = document.getElementById('projectModal');
+  if (projectModal) {
+    projectModal.addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+  }
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+});
+
+// Export functions to global scope
+window.openModal = openModal;
+window.closeModal = closeModal;
+</script>
+</body>
+</html>
