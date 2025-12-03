@@ -296,8 +296,8 @@ const projectsData = {
     status: 'Completed',
     date: 'December 2025',
     technologies: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Dark Mode'],
-    liveUrl: '#',
-    codeUrl: '#',
+    liveUrl: 'home.html',
+    codeUrl: 'https://github.com/Triunth/My-portfolio',
     transcript: `=== PORTFOLIO WEBSITE ===
 
 This is my personal portfolio website that you're currently viewing! It showcases my skills, projects, and contact information.
@@ -316,6 +316,36 @@ TECHNOLOGIES:
 - Vanilla JavaScript for interactivity
 - Google Fonts (Inter)
 - No frameworks or libraries
+
+PROJECT LINKS:
+1. Live Demo: home.html (you're viewing it now!)
+2. Source Code: https://github.com/Triunth/My-portfolio
+
+KEY FEATURES IMPLEMENTED:
+1. DARK/LIGHT THEME TOGGLE
+   - Uses localStorage to remember preference
+   - Smooth transitions between themes
+   - Custom CSS variables for theming
+
+2. ANIMATED BACKGROUND
+   - Floating blob animations
+   - Gradient overlays
+   - Performance optimized
+
+3. RESPONSIVE DESIGN
+   - Mobile-first approach
+   - Flexible grid layouts
+   - Media queries for all screen sizes
+
+4. INTERACTIVE ELEMENTS
+   - Project modals with detailed info
+   - Smooth animations and transitions
+   - Form handling with validation
+
+5. ACCESSIBILITY
+   - ARIA labels for screen readers
+   - Keyboard navigation support
+   - Semantic HTML structure
 
 This portfolio demonstrates my ability to create modern, user-friendly web interfaces with clean code and attention to detail.`
   },
@@ -547,12 +577,12 @@ function openModal(projectId) {
   if (liveBtn) liveBtn.href = project.liveUrl || '#';
   
   if (codeBtn) {
-    // For Rentify project, use GitHub repository link (no alert)
-    if (projectId === '3') {
+    // For Portfolio Website (ID 1) and Rentify (ID 3), use GitHub links
+    if (projectId === '1' || projectId === '3') {
       codeBtn.href = project.codeUrl;
       codeBtn.onclick = null; // Remove the alert
     } else {
-      // For other projects, keep the "deleted code" alert
+      // For Todo List project (ID 2), keep the "deleted code" alert
       codeBtn.href = '#';
       codeBtn.onclick = (e) => {
         e.preventDefault();
